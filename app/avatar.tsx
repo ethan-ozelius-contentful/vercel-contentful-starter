@@ -8,7 +8,7 @@ export default function Avatar({
   picture: any;
 }) {
 
-  console.log('JSON.stringify(picture) => ', JSON.stringify(picture, null, 4))
+  // console.log('JSON.stringify(picture) => ', JSON.stringify(picture, null, 4))
   
   return (
     <div className="flex items-center">

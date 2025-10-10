@@ -33,3 +33,20 @@ export async function getAllTutorials(isDraftMode: boolean): Promise<any[]> {
   );
   return entries.items;
 }
+
+export async function getTutorialBySlug(
+  slug: string,
+  isDraftMode: boolean
+): Promise<any> {
+  const contentfulClient = isDraftMode ? previewClient : client;
+  const response = await contentfulClient.getEntries({
+    content_type: "tutorial",
+    "fields.slug": slug,
+  });
+
+  if (response.items.length > 0) {
+    return { tutorial: response.items[0] };
+  } else {
+    throw new Error(`No tutorial found for slug: ${slug}`);
+  }
+}

@@ -9,7 +9,7 @@ interface ContentfulImageProps {
   [key: string]: any; // For other props that might be passed
 }
 
-const contentfulLoader = ({ src, width, quality }: ContentfulImageProps) => {
+export const contentfulLoader = ({ src, width, quality }: ContentfulImageProps) => {
   return `${src}?w=${width}&q=${quality || 75}`;
 };
 
