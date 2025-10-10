@@ -6,7 +6,7 @@ import CoverImage from "./cover-image";
 import Avatar from "./avatar";
 import MoreStories from "./more-stories";
 
-import { getAllPosts } from "@/lib/api";
+import { getAllTutorials } from "@/lib/api";
 import { CMS_NAME, CMS_URL } from "@/lib/constants";
 
 function Intro() {
@@ -51,15 +51,18 @@ function HeroPost({
   author: any;
   slug: string;
 }) {
+
+  console.log(`[ module ] function() author => `, author )
+  
   return (
     <section>
       <div className="mb-8 md:mb-16">
-        <CoverImage title={title} slug={slug} url={coverImage.url} />
+        <CoverImage title={title} slug={slug} url={coverImage.fields.file.url} />
       </div>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
         <div>
           <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
-            <Link href={`/posts/${slug}`} className="hover:underline">
+            <Link href={`/tutorials/${slug}`} className="hover:underline">
               {title}
             </Link>
           </h3>
@@ -69,7 +72,7 @@ function HeroPost({
         </div>
         <div>
           <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          {author && <Avatar name={author.name} picture={author.picture} />}
+          {author && <Avatar name={author.fields.name} picture={author.fields.picture} />}
         </div>
       </div>
     </section>
@@ -77,25 +80,26 @@ function HeroPost({
 }
 
 export default async function Page() {
-  const { isEnabled } = draftMode();
-  const allPosts = await getAllPosts(isEnabled);
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
+  const { isEnabled } = await draftMode();  
+  const allTutorials = await getAllTutorials(isEnabled);
+  const firstTutorial = allTutorials[0];
+
+  // const moreTutorials = allTutorials.slice(1);
 
   return (
     <div className="container mx-auto px-5">
       <Intro />
-      {heroPost && (
+      {firstTutorial && (
         <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
+          title={firstTutorial.fields.title}
+          coverImage={firstTutorial.fields.bannerImage}
+          date={firstTutorial.sys.createdAt}
+          author={firstTutorial.fields.authors[0]}
+          slug={firstTutorial.fields.slug}
+          excerpt={firstTutorial.fields.title}
         />
       )}
-      <MoreStories morePosts={morePosts} />
+      {/* <MoreStories morePosts={moreTutorials} /> */}
     </div>
   );
 }

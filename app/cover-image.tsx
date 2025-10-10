@@ -14,6 +14,11 @@ export default function CoverImage({
   url: string;
   slug?: string;
 }) {
+
+  // console.log('JSON.stringify(title) => ', JSON.stringify(title, null, 4))
+  // console.log('JSON.stringify(url) => ', JSON.stringify(url, null, 4))
+  // console.log('JSON.stringify(slug) => ', JSON.stringify(slug, null, 4))
+  
   const image = (
     <ContentfulImage
       alt={`Cover Image for ${title}`}

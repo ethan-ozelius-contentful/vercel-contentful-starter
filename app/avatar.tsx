@@ -7,6 +7,9 @@ export default function Avatar({
   name: string;
   picture: any;
 }) {
+
+  console.log('JSON.stringify(picture) => ', JSON.stringify(picture, null, 4))
+  
   return (
     <div className="flex items-center">
       <div className="mr-4 w-12 h-12">
@@ -15,7 +18,7 @@ export default function Avatar({
           className="object-cover h-full rounded-full"
           height={48}
           width={48}
-          src={picture.url}
+          src={picture.fields.file.url}
         />
       </div>
       <div className="text-xl font-bold">{name}</div>
