@@ -33,8 +33,8 @@ jobs:
           }
           JSON
         env:
-          E2E_RESULTS_TOKEN: ${{ secrets.RESULTS_TOKEN }}
-          E2E_RESULTS_WEBHOOK_URL: ${{ secrets.RESULTS_WEBHOOK_URL }}
+          RESULTS_TOKEN: ${{ secrets.RESULTS_TOKEN }}
+          RESULTS_WEBHOOK_URL: ${{ secrets.RESULTS_WEBHOOK_URL }}
       - name: Run Cypress
         uses: cypress-io/github-action@v6
         with:
@@ -69,5 +69,5 @@ jobs:
           }
           JSON
         env:
-          E2E_RESULTS_TOKEN: ${{ secrets.RESULTS_TOKEN }}
-          E2E_RESULTS_WEBHOOK_URL: ${{ secrets.RESULTS_WEBHOOK_URL }}
+          RESULTS_TOKEN: ${{ secrets.RESULTS_TOKEN }}
+          RESULTS_WEBHOOK_URL: ${{ secrets.RESULTS_WEBHOOK_URL }}
