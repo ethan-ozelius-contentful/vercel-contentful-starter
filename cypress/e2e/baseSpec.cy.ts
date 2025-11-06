@@ -65,7 +65,7 @@ describe("Dynamic Contentful Integration Tests", () => {
         `Executing assertion ${index + 1}: ${fieldName || "Content check"}`
       );
 
-      cy.get(selector).should("be.visible").and("contain", value);
+      cy.get(selector!).should("be.visible").and("contain", value);
     });
   });
 });
