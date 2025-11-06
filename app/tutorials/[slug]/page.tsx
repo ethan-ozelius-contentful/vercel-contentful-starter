@@ -30,13 +30,11 @@ export default async function TutorialsPage({
   
   const tutorial = await getTutorialBySlug(resolvedParams.slug, isEnabled);
 
-// console.log('JSON.stringify(tutorial.fields.body) => ', JSON.stringify(tutorial.fields.body, null, 4))
-
   return (
     <div className="container mx-auto px-5">
       <h2 className="mb-20 mt-8 text-2xl font-bold leading-tight tracking-tight md:text-4xl md:tracking-tighter">
         <Link href="/" className="hover:underline">
-          Blog
+          Contor
         </Link>
         .
       </h2>

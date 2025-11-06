@@ -18,14 +18,10 @@ function TutorialPreview({
   author: any;
   slug: string;
 }) {
-
-  // console.log(`title => `, title)
-  console.log(`bannerImage => `, bannerImage.fields.file)
-  
   return (
     <div key={`${title}`}>
       <div className="mb-5">
-        <CoverImage title={title} slug={slug} url={bannerImage.url} />
+        <CoverImage title={title} slug={slug} url={bannerImage.fields.file.url} />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
         <Link href={`/posts/${slug}`} className="hover:underline">
@@ -42,7 +38,6 @@ function TutorialPreview({
 }
 
 export default function moreTutorials({ moreTutorials }: { moreTutorials: any[] }) {
-
   return (
     <section>
       <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">

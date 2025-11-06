@@ -17,6 +17,7 @@ interface ParsedEntry extends Entry {
   authors: Record<string, EntryFieldValue>;
   bannerImage: Record<string, EntryFieldValue>;
   body: Record<string, EntryFieldValue>;
+  date: string;
   skills: Record<string, EntryFieldValue>[];
   slug: string | null;
   title: string | null;
@@ -28,6 +29,7 @@ const parseEntry = (entry: Entry): ParsedEntry => {
     authors: entry.fields.authors || {},
     bannerImage: entry.fields.bannerImage || {},
     body: entry.fields.body || {},
+    date: entry.sys.createdAt,
     skills: entry.fields.skills || [],
     slug: entry.fields.slug || null,
     title: entry.fields.title || null,
@@ -50,8 +52,17 @@ export async function getAllTutorials(
     limit,
   });
 
-  // @ts-expect-error I don't understant Contentful types
-  const parsedEntries = entriesResponse.items.map((entry) => parseEntry(entry));
+  // console.log(`entriesResponse => `, JSON.stringify(entriesResponse.items,null,4))
+  
+
+  const parsedEntries = entriesResponse.items.map((entry) => {
+    // @ts-ignore
+    // console.log(`entriesResponse.entry => `, JSON.stringify(entry.fields.bannerImage.fields.title,null,4))
+    
+    
+    // @ts-expect-error I don't understant Contentful types
+    return parseEntry(entry)
+  });
 
   return parsedEntries as unknown as ParsedEntry[];
 }

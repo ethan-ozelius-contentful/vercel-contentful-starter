@@ -44,10 +44,9 @@ const Text = ({ children }: { children: any }) => <p className="align-center">{c
 
 const ImageWrapper = ({ children }: { children: any }) => {
 
-  console.log(`[ markdown ] <ImageWrapper> children => `, JSON.stringify(children,null,4) )
-  
   return (
     <div className="relative w-full h-96 my-8">
+      {/* @ts-ignore */}
       <RichTextAsset id={children.data.target.sys.id}  asset={children.data.target.fields}>{children}</RichTextAsset>
     </div>
   );
