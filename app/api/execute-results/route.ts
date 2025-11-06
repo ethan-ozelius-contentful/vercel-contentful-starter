@@ -31,5 +31,9 @@ export async function GET(req: Request) {
     runId,
     htmlUrl: run.html_url,
     summaryArtifactUrl: summary?.archive_download_url || null
+  }, {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://c9e8fad6-9877-454f-8db8-ed9dcecd0809.ctfcloud.net'
+    }
   });
 }
