@@ -56,9 +56,30 @@ describe("Dynamic Contentful Integration Tests", () => {
     }
   });
 
+  
+
   it("should execute all assertions from the test suite", () => {
+    const assertions = [
+        {
+            "contentType": "tutorial",
+            "entryId": "6JyLopBthivLRgVemaKOSd",
+            "fieldName": "title",
+            "selector": "[data-field=\"title\"]",
+            "type": "text",
+            "value": "Machine Learning Fundamentals with Python"
+        },
+        {
+            "contentType": "tutorial",
+            "entryId": "6JyLopBthivLRgVemaKOSd",
+            "fieldName": "slug",
+            "selector": "[data-field=\"slug\"]",
+            "type": "text",
+            "value": "machine-learning-fundamentals-with-python"
+        }
+    ]
+    
     // Dynamically execute all assertions
-    testSuite.assertions.forEach((assertion, index) => {
+    assertions.forEach((assertion, index) => {
       const { value, selector, fieldName } = assertion;
 
       cy.log(
