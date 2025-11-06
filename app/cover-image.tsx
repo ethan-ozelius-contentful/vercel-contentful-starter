@@ -15,8 +15,8 @@ export default function CoverImage({
   slug?: string;
 }) {
 
-  // console.log('JSON.stringify(title) => ', JSON.stringify(title, null, 4))
-  // console.log('JSON.stringify(url) => ', JSON.stringify(url, null, 4))
+  console.log('ASDF JSON.stringify(title) => ', JSON.stringify(title, null, 4))
+  console.log('ASDF JSON.stringify(url) => ', JSON.stringify(url, null, 4))
   // console.log('JSON.stringify(slug) => ', JSON.stringify(slug, null, 4))
   
   const image = (

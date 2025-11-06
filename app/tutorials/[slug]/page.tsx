@@ -28,7 +28,7 @@ export default async function TutorialsPage({
   const { isEnabled } = await draftMode();
   const resolvedParams = await params;
   
-  const { tutorial } = await getTutorialBySlug(resolvedParams.slug, isEnabled);
+  const tutorial = await getTutorialBySlug(resolvedParams.slug, isEnabled);
 
 // console.log('JSON.stringify(tutorial.fields.body) => ', JSON.stringify(tutorial.fields.body, null, 4))
 
