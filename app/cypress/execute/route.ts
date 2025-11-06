@@ -90,7 +90,8 @@ export async function OPTIONS(request: NextRequest) {
   return new NextResponse(null, {
     status: 200,
     headers: {
-      'Access-Control-Allow-Origin': 'https://app.contentful.com',
+      // 'Access-Control-Allow-Origin': 'https://app.contentful.com',
+      'Access-Control-Allow-Origin': 'https://c9e8fad6-9877-454f-8db8-ed9dcecd0809.ctfcloud.net',
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
