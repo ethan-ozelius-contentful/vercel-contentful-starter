@@ -60,7 +60,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(response, { 
       status: 200,
       headers: {
-        'Access-Control-Allow-Origin': 'https://app.contentful.com'
+        'Access-Control-Allow-Origin': 'https://c9e8fad6-9877-454f-8db8-ed9dcecd0809.ctfcloud.net'
+        // 'Access-Control-Allow-Origin': 'https://app.contentful.com'
       }
     });
     
@@ -76,7 +77,8 @@ export async function POST(request: NextRequest) {
       { 
         status: 500,
         headers: {
-          'Access-Control-Allow-Origin': 'https://app.contentful.com'
+          'Access-Control-Allow-Origin': 'https://c9e8fad6-9877-454f-8db8-ed9dcecd0809.ctfcloud.net'
+          // 'Access-Control-Allow-Origin': 'https://app.contentful.com'
         }
       }
     );
