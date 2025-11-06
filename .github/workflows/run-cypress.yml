@@ -41,7 +41,7 @@ jobs:
           browser: chrome
           config-file: cypress.config.ts
           config: baseUrl=${{ github.event.inputs.baseUrl }}
-          env: TEST_SUITE=${{ fromJSON(github.event.inputs.config) }}
+          env: TEST_SUITE=${{ github.event.inputs.config }}
       - name: Build summary (also file)
         if: always()
         run: |
