@@ -14,6 +14,25 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
       - run: npm ci
+      - name: Notify start → Vercel
+        run: |
+          curl -sS -X POST "$RESULTS_WEBHOOK_URL" \
+            -H "Authorization: Bearer $RESULTS_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d @- <<'JSON'
+          {
+            "phase": "started",
+            "requestId": "${{ inputs.requestId }}",
+            "runId": "${{ github.run_id }}",
+            "runAttempt": "${{ github.run_attempt }}",
+            "repo": "${{ github.repository }}",
+            "workflow": "${{ github.workflow }}",
+            "htmlUrl": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          }
+          JSON
+        env:
+          E2E_RESULTS_TOKEN: ${{ secrets.RESULTS_TOKEN }}
+          E2E_RESULTS_WEBHOOK_URL: ${{ secrets.RESULTS_WEBHOOK_URL }}
       - name: Run Cypress
         uses: cypress-io/github-action@v6
         with:
@@ -21,4 +40,32 @@ jobs:
           config-file: cypress.config.ts
           config: baseUrl=${{ github.event.inputs.baseUrl }}
           env: TEST_SUITE=${{ github.event.inputs.config }}
-
+      - name: Build summary (also file)
+        if: always()
+        run: |
+          mkdir -p artifacts
+          echo "## Cypress run: ${{ job.status }}" | tee artifacts/summary.md >> "$GITHUB_STEP_SUMMARY"
+          echo "- Base URL: ${{ inputs.baseUrl }}"    >> artifacts/summary.md
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-summary
+          path: artifacts/summary.md
+      - name: Notify finish → Vercel
+        if: always()
+        run: |
+          curl -sS -X POST "$RESULTS_WEBHOOK_URL" \
+            -H "Authorization: Bearer $RESULTS_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d @- <<'JSON'
+          {
+            "phase": "completed",
+            "requestId": "${{ inputs.requestId }}",
+            "runId": "${{ github.run_id }}",
+            "runAttempt": "${{ github.run_attempt }}",
+            "status": "${{ job.status }}"
+          }
+          JSON
+        env:
+          E2E_RESULTS_TOKEN: ${{ secrets.RESULTS_TOKEN }}
+          E2E_RESULTS_WEBHOOK_URL: ${{ secrets.RESULTS_WEBHOOK_URL }}
