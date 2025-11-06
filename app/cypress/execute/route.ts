@@ -57,7 +57,12 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString()
     };
     
-    return NextResponse.json(response, { status: 200 });
+    return NextResponse.json(response, { 
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': 'https://app.contentful.com'
+      }
+    });
     
   } catch (error) {
     console.error('Error processing POST request:', error);
@@ -68,7 +73,12 @@ export async function POST(request: NextRequest) {
         message: 'Internal server error',
         error: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      { 
+        status: 500,
+        headers: {
+          'Access-Control-Allow-Origin': 'https://app.contentful.com'
+        }
+      }
     );
   }
 }
