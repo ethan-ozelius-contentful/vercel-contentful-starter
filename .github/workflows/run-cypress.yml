@@ -6,6 +6,8 @@ on:
         required: true
       config:
         required: true
+      requestId:
+        required: true
 jobs:
   e2e:
     runs-on: ubuntu-latest
