@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
           ref: 'main', // branch to run on
-          inputs: { requestId: '2', baseUrl: 'https://vercel-contentful-starter-ethan-oze-mocha.vercel.app/', config: JSON.stringify(testSuite) }, // your workflow_dispatch inputs
+          inputs: { requestId: '2', baseUrl: 'https://vercel-contentful-starter-ethan-oze-mocha.vercel.app/', config: testSuite }, // your workflow_dispatch inputs
         }),
       }
     );
