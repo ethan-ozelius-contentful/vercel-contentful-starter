@@ -18,8 +18,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          headless: true
-          configFile: cypress.config.ts
+          config-file: cypress.config.ts
           config: baseUrl=${{ github.event.inputs.baseUrl }}
           env: test_suite=${{ github.event.inputs.config }}
 
