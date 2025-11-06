@@ -1,5 +1,4 @@
-import { TypeTutorial } from "@/generated-contentful-types/20251013_Content_Model_types";
-import { Entry, EntryFieldValue } from "@contentful/types";
+// import { TypeTutorial } from "@/generated-contentful-types/20251013_Content_Model_types";
 import { createClient, EntryCollection, EntrySkeletonType } from "contentful";
 
 const client = createClient({
@@ -13,23 +12,25 @@ const previewClient = createClient({
   host: "preview.contentful.com",
 });
 
-interface ParsedEntry extends Entry {
-  authors: Record<string, EntryFieldValue>;
-  bannerImage: Record<string, EntryFieldValue>;
-  body: Record<string, EntryFieldValue>;
+interface ParsedEntry {
+  authors: Record<string, any>;
+  bannerImage: Record<string, any>;
+  body: Record<string, any>;
   date: string;
-  skills: Record<string, EntryFieldValue>[];
+  createdAt?: string;
+  skills: Record<string, any>[];
   slug: string | null;
   title: string | null;
 }
 
-const parseEntry = (entry: Entry): ParsedEntry => {
+const parseEntry = (entry: any): ParsedEntry => {
   return {
     ...entry,
     authors: entry.fields.authors || {},
     bannerImage: entry.fields.bannerImage || {},
     body: entry.fields.body || {},
-    date: entry.sys.createdAt,
+    date: entry.sys.createdAt || '',
+    createdAt: entry.sys.createdAt || '',
     skills: entry.fields.skills || [],
     slug: entry.fields.slug || null,
     title: entry.fields.title || null,
@@ -60,7 +61,6 @@ export async function getAllTutorials(
     // console.log(`entriesResponse.entry => `, JSON.stringify(entry.fields.bannerImage.fields.title,null,4))
     
     
-    // @ts-expect-error I don't understant Contentful types
     return parseEntry(entry)
   });
 
@@ -78,7 +78,6 @@ export async function getTutorialBySlug(
   });
 
   if (response.items.length > 0) {
-    // @ts-expect-error I don't understant Contentful types
     const parsedEntry = parseEntry(response.items[0]);
 
     return parsedEntry;

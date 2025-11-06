@@ -88,7 +88,8 @@ export default async function Page() {
         <HeroPost
           title={firstTutorial.title || ''}
           coverImage={firstTutorial.bannerImage}
-          date={firstTutorial.sys.createdAt}
+          // @ts-ignore
+          date={firstTutorial.createdAt}
           author={firstTutorial.authors[0]}
           slug={firstTutorial.slug || ''}
           excerpt={firstTutorial.title || ''}

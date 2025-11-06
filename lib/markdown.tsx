@@ -54,6 +54,7 @@ const ImageWrapper = ({ children }: { children: any }) => {
 
 
 export function Markdown({ content }: { content: Content }) {
+  // @ts-ignore
   return documentToReactComponents(content, {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (children: any) => <ImageWrapper>{children}</ImageWrapper>,
