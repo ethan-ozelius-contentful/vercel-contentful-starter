@@ -1,4 +1,21 @@
-import { CypressTestSuite } from "../../src/cypress/types";
+// import { CypressTestSuite } from "../../src/cypress/types";
+
+type CypressTestSuite = {
+  id: string;
+  name: string;
+  description?: string;
+  environment: string;
+  url: string;
+  assertions: Array<{
+    type: "text" | "element";
+    value: string;
+    selector?: string;
+    fieldName?: string;
+    entryId?: string;
+    contentType?: string;
+  }>;
+};
+
 
 describe("Dynamic Contentful Integration Tests", () => {
   let testSuite: CypressTestSuite;
