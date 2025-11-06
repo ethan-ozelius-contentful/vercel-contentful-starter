@@ -10,7 +10,11 @@ export async function GET(req: Request) {
   if (!runId && requestId) {
     const rec = await kv.hgetall<Record<string, string>>(`req:${requestId}`);
     runId = rec?.runId;
-    if (!runId) return Response.json({ status: 'starting', requestId });
+    if (!runId) return Response.json({ status: 'starting', requestId }, {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://c9e8fad6-9877-454f-8db8-ed9dcecd0809.ctfcloud.net'
+    }
+  });
   }
 
   const base = `https://api.github.com/repos/ethan-ozelius-contentful/vercel-contentful-starter`;
@@ -18,7 +22,11 @@ export async function GET(req: Request) {
 
   const run = await fetch(`${base}/actions/runs/${runId}`, { headers }).then(r => r.json());
   if (run?.status !== 'completed') {
-    return Response.json({ status: run?.status ?? 'in_progress', runId, htmlUrl: run?.html_url ?? null });
+    return Response.json({ status: run?.status ?? 'in_progress', runId, htmlUrl: run?.html_url ?? null }, {
+    headers: {
+      'Access-Control-Allow-Origin': 'https://c9e8fad6-9877-454f-8db8-ed9dcecd0809.ctfcloud.net'
+    }
+  });
   }
 
   // Optional: expose a summary artifact URL
