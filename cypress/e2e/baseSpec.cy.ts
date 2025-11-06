@@ -23,8 +23,8 @@ describe("Dynamic Contentful Integration Tests", () => {
   before(() => {
     // Get test suite data from environment variable
     const testSuiteJson = Cypress.env("TEST_SUITE");
-    console.log("testSuiteJson => ", testSuiteJson);
-    console.log("testSuiteJson => ", JSON.stringify(testSuiteJson, null, 4));
+    cy.log("testSuiteJson => ", testSuiteJson);
+    cy.log("testSuiteJson => ", JSON.stringify(testSuiteJson, null, 4));
 
     if (!testSuiteJson) {
       throw new Error(
