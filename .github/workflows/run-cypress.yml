@@ -20,5 +20,5 @@ jobs:
           browser: chrome
           config-file: cypress.config.ts
           config: baseUrl=${{ github.event.inputs.baseUrl }}
-          env: TEST_SUITE=${{ toJson(github.event.inputs.config) }}
+          env: TEST_SUITE=${{ github.event.inputs.config }}
 
