@@ -38,7 +38,7 @@ describe("Dynamic Contentful Integration Tests", () => {
           ? JSON.parse(testSuiteJson)
           : testSuiteJson;
     } catch (error) {
-      throw new Error(`Invalid test suite JSON: ${error}`);
+      throw new Error(`Invalid test suite JSON: ${error} ${testSuiteJson}`);
     }
 
     cy.log("Loaded test suite:", testSuite.name);
