@@ -5,11 +5,50 @@ export async function POST(request: NextRequest) {
     // Parse the request body
     const body = await request.json();
     
-    // Log the incoming request for debugging
+    const testSuite = {
+      "description": "This is a test suite for the Spring Campaign, running in the production environment.",
+      "environment": "Production",
+      "id": "c9b0b7e4-abc6-4d8d-adda-3925eca4087d",
+      "name": "Spring Campaign Test Suite",
+      "url": "https://contentful.com",
+      "assertions": [
+          {
+              "contentType": "tutorial",
+              "entryId": "6JyLopBthivLRgVemaKOSd",
+              "fieldName": "title",
+              "selector": "[data-field=\"title\"]",
+              "type": "text",
+              "value": "Machine Learning Fundamentals with Python"
+          },
+          {
+              "contentType": "tutorial",
+              "entryId": "6JyLopBthivLRgVemaKOSd",
+              "fieldName": "slug",
+              "selector": "[data-field=\"slug\"]",
+              "type": "text",
+              "value": "machine-learning-fundamentals-with-python"
+          }
+      ]
+  }
     console.log('Received POST request to /api/cypress/execute:', body);
-    
+    const resp = await fetch(
+      `https://api.github.com/repos/ethan-ozelius-contentful/vercel-contentful-starter` +
+        `/actions/workflows/run-cypress/dispatches`,
+      {
+        method: 'POST',
+        headers: {
+          authorization: `Bearer ${process.env.GH_TOKEN!}`, // PAT or GitHub App installation token
+          accept: 'application/vnd.github+json',
+        },
+        body: JSON.stringify({
+          ref: 'main', // branch to run on
+          inputs: { requestId: '2', baseUrl: 'https://vercel-contentful-starter-ethan-oze-mocha.vercel.app/', config: JSON.stringify(testSuite) }, // your workflow_dispatch inputs
+        }),
+      }
+    );
+    const respsonseText = await resp.text();
     // Add logic here to execute Cypress tests github action, passing payload from request
-    
+    console.log('Received POST request to /api/cypress/execute:', respsonseText);
     // Example response
     const response = {
       success: true,
