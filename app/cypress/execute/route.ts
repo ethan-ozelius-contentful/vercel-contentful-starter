@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     console.log('Received POST request to /api/cypress/execute:', body);
     const resp = await fetch(
       `https://api.github.com/repos/ethan-ozelius-contentful/vercel-contentful-starter` +
-        `/actions/workflows/run-cypress/dispatches`,
+        `/actions/workflows/run-cypress.yml/dispatches`,
       {
         method: 'POST',
         headers: {
